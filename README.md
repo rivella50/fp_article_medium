@@ -1,16 +1,10 @@
-# fp_article
+# Functional Error Handling in an async Flutter API Call using TaskEither
 
-A new Flutter project.
+This is the demo project which has been built for an [article](https://medium.com/@rivella50/functional-error-handling-in-an-async-flutter-api-call-using-taskeither-c5cd416c666c) published at Medium on February 10, 2023.
 
-## Getting Started
+It has been tested with Flutter SDKs 3.3.x and 3.7.x.
 
-This project is a starting point for a Flutter application.
+The project uses some ideas from other developers/articles:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Exceptions: [Article](https://medium.com/@lazizbekfayziyev/how-to-simplify-repositories-and-handle-request-error-cases-in-flutter-cf49bc5f561e) from Lazizbek Fayziyev
+* App architecture: Inspired by an [article](https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/) from Andrea Bizzotto
