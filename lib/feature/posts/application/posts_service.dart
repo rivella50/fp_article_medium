@@ -10,11 +10,12 @@ class PostsService {
   PostsService(this.ref);
   final Ref ref;
 
-  Future<Either<ApiException, List<Post>>> getUnevenPosts() async {
+  Future<Either<ApiException, List<Post>>> getUnevenPosts() {
     final repository = ref.read(postsRepositoryProvider);
-    await Future.delayed(const Duration(milliseconds: 250));
-    final result = await repository.getPosts().run();
-    return result.map((list) => list.where((post) => post.id!.isOdd).toList());
+    return repository.getPosts().flatMap(TaskEither.tryCatchK(
+      (list) async => list.where((post) => post.id!.isOdd).toList(),
+      (_, __) => ApiException(message: 'error when filtering posts'),
+    )).run();
   }
 }
 
