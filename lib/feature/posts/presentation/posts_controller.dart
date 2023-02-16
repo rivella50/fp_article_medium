@@ -13,7 +13,7 @@ class PostsController extends StateNotifier<PostsState> {
 
   final PostsService postService;
 
-  void getPosts() async {
+  Future<void> getPosts() async {
     state = PostsState(posts: [], widgetState: const VoidAsyncValue.loading());
     final result = await postService.getUnevenPosts();
     result.mapLeft((a) => state = state.copyWith(

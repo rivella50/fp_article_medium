@@ -7,6 +7,17 @@ class ApiException implements Exception {
 
   @override
   String toString() => message ?? 'unknown error';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ApiException &&
+        other.message == message;
+  }
+
+  @override
+  int get hashCode => message.hashCode;
 }
 
 class BadRequestException extends ApiException {

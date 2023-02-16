@@ -7,18 +7,22 @@ import 'package:fpdart/fpdart.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PostsService {
-  PostsService(this.ref);
-  final Ref ref;
+  PostsService({required this.repository});
+
+  final PostsRepository repository;
 
   Future<Either<ApiException, List<Post>>> getUnevenPosts() {
-    final repository = ref.read(postsRepositoryProvider);
-    return repository.getPosts().flatMap(TaskEither.tryCatchK(
-      (list) async => list.where((post) => post.id!.isOdd).toList(),
-      (_, __) => ApiException(message: 'error when filtering posts'),
-    )).run();
+    return repository
+        .getPosts()
+        .flatMap(TaskEither.tryCatchK(
+          (list) async => list.where((post) => post.id!.isOdd).toList(),
+          (_, __) => ApiException(message: 'error when filtering posts'),
+        ))
+        .run();
   }
 }
 
 final postsServiceProvider = Provider<PostsService>((ref) {
-  return PostsService(ref);
+  final repository = ref.watch(postsRepositoryProvider);
+  return PostsService(repository: repository);
 });
